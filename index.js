@@ -15,8 +15,23 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
+let exerciseSessionSchema = mongoose.Schema({
+  description: { type: String, required: true },
+  duration: { type: Number, required: true },
+  date: String
+})
+
+let userSchema = mongoose.Schema({
+  username: { type: String, required: true },
+  log: [exerciseSessionSchema]
+})
+
+let Session = mongoose.model('Session', exerciseSessionSchema);
+let User = mongoose.model('User', userSchema);
+
 let responseObject = {}
 app.post('/api/users', (req, res) => {
+  //console.log(req.body)
   let { username } = req.body;
   responseObject['username'] = username;
 
