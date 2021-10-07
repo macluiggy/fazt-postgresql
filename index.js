@@ -5,12 +5,12 @@ require('dotenv').config()
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.Pw, { useNewUrlParser: true }, { useUnifiedTopology: true });
+mongoose.connect(process.env.PW, { useNewUrlParser: true }, { useUnifiedTopology: true });
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'))
-
+//no puede ser
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
