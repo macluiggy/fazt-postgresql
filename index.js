@@ -33,9 +33,30 @@ let responseObject = {}
 app.post('/api/users', (req, res) => {
   //console.log(req.body)
   let { username } = req.body;
-  responseObject['username'] = username;
-
-  res.json(responseObject)
+  let newUser = new User({ username: username })
+  newUser.save((error, savedUser) => {
+    if (!error) {
+      responseObject['username'] = savedUser.username;
+      responseObject['_id'] = savedUser.id
+      res.json(responseObject)
+    }
+  })
+  
+})
+app.get('/api/users', (req, res) => {
+  User.find({}, (error, arrayOfUsers) => {
+    res.json(arrayOfUsers);
+  })
+})
+app.post('/api/users/:_id/exercises', (req, res) => {
+  let { description, duration, date } = req.body
+  console.log(description, duration, date)
+  let newSession = new Session({
+    description: parseInt(description),
+    duration: duration,
+    date: date,
+  })
+  res.json({ hola: newSession.description })
 })
 
 
