@@ -29,13 +29,14 @@ let userSchema = mongoose.Schema({
 let Session = mongoose.model('Session', exerciseSessionSchema);
 let User = mongoose.model('User', userSchema);
 
-let responseObject = {}
+
 app.post('/api/users', (req, res) => {
   //console.log(req.body)
   let { username } = req.body;
   let newUser = new User({ username: username })
   newUser.save((error, savedUser) => {
     if (!error) {
+      let responseObject = {}
       responseObject['username'] = savedUser.username;
       responseObject['_id'] = savedUser.id
       res.json(responseObject)
@@ -52,14 +53,14 @@ app.post('/api/users/:_id/exercises', (req, res) => {
   let { description, duration, date } = req.body
   let { _id } = req.params;
   console.log(description, duration, date, _id )
+  if (!date) {
+    date = new Date().toISOString().substring(0, 10);
+  }
   let newSession = new Session({
     description: description,
     duration: parseInt(duration),
     date: date,
   })
-  if (!date) {
-    newSession.date = new Date().toISOString().substring(0, 10);
-  }
   
   User.findByIdAndUpdate(
     _id,
@@ -67,13 +68,14 @@ app.post('/api/users/:_id/exercises', (req, res) => {
     { new: true },
     (error, updatedUser) => {
       if (!error && updatedUser) {
+        let responseObject = {}
         let { username, _id } = updatedUser
         let { description, duration, date } = newSession;
         
         responseObject['username'] = username;
         responseObject['description'] = description;
         responseObject['duration'] = duration;
-        responseObject['date'] = date;
+        responseObject['date'] = new Date(date).toDateString();
         responseObject['_id'] = _id
         res.json(responseObject)
       } else {
@@ -85,6 +87,27 @@ app.post('/api/users/:_id/exercises', (req, res) => {
   )
   //console.log(_id)
   //res.json({ hola: newSession.description })
+})
+
+app.get('/api/users/:_id/logs', (req, res) => {
+  let { _id: id } = req.params
+  console.log(id)
+  User.findById(
+    id,
+    (error, user) => {
+      if (!error && user) {
+        let responseObject = {}
+        let count = user.log.length
+        let { username, _id, log } = user;
+        responseObject['_id'] = _id;
+        responseObject['username'] = username;
+        responseObject['count'] = count;
+        responseObject['log'] = log
+        res.json(responseObject)
+      }
+    }
+  )
+  //res.json({})
 })
 
 
