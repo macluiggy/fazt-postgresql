@@ -50,13 +50,41 @@ app.get('/api/users', (req, res) => {
 })
 app.post('/api/users/:_id/exercises', (req, res) => {
   let { description, duration, date } = req.body
-  console.log(description, duration, date)
+  let { _id } = req.params;
+  console.log(description, duration, date, _id )
   let newSession = new Session({
-    description: parseInt(description),
-    duration: duration,
+    description: description,
+    duration: parseInt(duration),
     date: date,
   })
-  res.json({ hola: newSession.description })
+  if (!date) {
+    newSession.date = new Date().toISOString().substring(0, 10);
+  }
+  
+  User.findByIdAndUpdate(
+    _id,
+    { $push: { log: newSession } },
+    { new: true },
+    (error, updatedUser) => {
+      if (!error && updatedUser) {
+        let { username, _id } = updatedUser
+        let { description, duration, date } = newSession;
+        
+        responseObject['username'] = username;
+        responseObject['description'] = description;
+        responseObject['duration'] = duration;
+        responseObject['date'] = date;
+        responseObject['_id'] = _id
+        res.json(responseObject)
+      } else {
+        res.json({
+          error: 'user not found'
+        })
+      }
+    }
+  )
+  //console.log(_id)
+  //res.json({ hola: newSession.description })
 })
 
 
