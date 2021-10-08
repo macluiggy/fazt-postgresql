@@ -77,9 +77,9 @@ app.post('/api/users/:_id/exercises', (req, res) => {
         responseObject['duration'] = duration;
         responseObject['date'] = new Date(date).toDateString();
         responseObject['_id'] = _id
-        res.json(responseObject)
+        return res.json(responseObject)
       } else {
-        res.json({
+        return res.json({
           error: 'user not found'
         })
       }
@@ -95,6 +95,9 @@ app.get('/api/users/:_id/logs', (req, res) => {
   User.findById(
     id,
     (error, user) => {
+      if(req.query.limit) {
+        
+      }
       if (!error && user) {
         let responseObject = {}
         let count = user.log.length
@@ -103,7 +106,7 @@ app.get('/api/users/:_id/logs', (req, res) => {
         responseObject['username'] = username;
         responseObject['count'] = count;
         responseObject['log'] = log
-        res.json(responseObject)
+        return res.json(responseObject)
       }
     }
   )
