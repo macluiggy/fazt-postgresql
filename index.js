@@ -91,12 +91,12 @@ app.post('/api/users/:_id/exercises', (req, res) => {
 
 app.get('/api/users/:_id/logs', (req, res) => {
   let { _id: id } = req.params
-  console.log(id)
+  //console.log(id)
   User.findById(
     id,
     (error, user) => {
       if(req.query.limit) {
-        
+        console.log(req.query)
       }
       if (!error && user) {
         let responseObject = {}
@@ -105,7 +105,14 @@ app.get('/api/users/:_id/logs', (req, res) => {
         responseObject['_id'] = _id;
         responseObject['username'] = username;
         responseObject['count'] = count;
-        responseObject['log'] = log
+        responseObject['log'] = log.map(item => {
+          let date = new Date(item.date).toDateString();
+          if (date == 'Invalid Date') {
+            date = new Date().toDateString()
+          }
+          item['date'] = date
+          return item
+        })
         return res.json(responseObject)
       }
     }
