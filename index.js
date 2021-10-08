@@ -95,9 +95,6 @@ app.get('/api/users/:_id/logs', (req, res) => {
   User.findById(
     id,
     (error, user) => {
-      if(req.query.limit) {
-        console.log(req.query)
-      }
       if (!error && user) {
         let responseObject = {}
         let count = user.log.length
@@ -113,6 +110,29 @@ app.get('/api/users/:_id/logs', (req, res) => {
           item['date'] = date
           return item
         })
+        if (req.query.limit) {
+          responseObject.log = responseObject.log.slice(0, req.query.limit);
+        }
+        if (req.query.from || req.query.to) {
+          let fromDate = new Date(0);
+          let toDate = new Date()
+
+          if (req.query.from) {
+            fromDate = new Date(req.query.from);
+          }
+          if (req.query.to) {
+            toDate = new Date(req.query.to)
+          }
+
+          fromDate = fromDate.getTime()
+          toDate = toDate.getTime()
+
+          responseObject.log = responseObject.log.filter(session => {
+            let sessionDate = new Date(session.date).getTime()
+
+            return sessionDate >= fromDate && sessionDate <= toDate;
+          })
+        }
         return res.json(responseObject)
       }
     }
