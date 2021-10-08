@@ -110,9 +110,7 @@ app.get('/api/users/:_id/logs', (req, res) => {
           item['date'] = date
           return item
         })
-        if (req.query.limit) {
-          responseObject.log = responseObject.log.slice(0, req.query.limit);
-        }
+        
         if (req.query.from || req.query.to) {
           let fromDate = new Date(0);
           let toDate = new Date()
@@ -132,6 +130,9 @@ app.get('/api/users/:_id/logs', (req, res) => {
 
             return sessionDate >= fromDate && sessionDate <= toDate;
           })
+        }
+        if (req.query.limit) {
+          responseObject.log = responseObject.log.slice(0, req.query.limit);
         }
         return res.json(responseObject)
       }
