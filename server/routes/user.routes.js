@@ -1,23 +1,19 @@
 const express = require("express");
 //model
-const User = require("../models/user.model")
-
+const User = require("../models/user.model");
+const { Session } = require("../models/session.model");
 const router = express.Router();
 //controllers
-const { create } = require("../controllers/user.controller");
-// router.route("/api/users").post((req, res) => {
-//   // //console.log(req.body)
-//   let { username } = req.body;
-//   let newUser = new User({ username: username });
-//   newUser.save((error, savedUser) => {
-//     if (!error) {
-//       let responseObject = {};
-//       responseObject["username"] = savedUser.username;
-//       responseObject["_id"] = savedUser.id;
-//       return res.status(200).json(responseObject);
-//     }
-//   });
-// });
-router.route("/api/users").post(create);
+const { create, getAllUsers } = require("../controllers/user.controller.ts");
+const {
+  addExercise,
+  showExercises,
+} = require("../controllers/session.controllers.ts");
 
-module.exports = router
+router.route("/api/users").post(create).get(getAllUsers);
+
+router.route("/api/users/:_id/exercises").post(addExercise);
+
+router.route("/api/users/:_id/logs").get(showExercises);
+
+module.exports = router;

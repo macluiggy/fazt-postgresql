@@ -5,5 +5,6 @@ let userSchema = mongoose.Schema({
   username: { type: String, required: true },
   log: [exerciseSessionSchema],
 });
+let User = mongoose.model("User", userSchema);
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = { User };
