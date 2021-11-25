@@ -4,6 +4,13 @@ const cors = require('cors')
 require('dotenv').config()
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+//models
+const { Session, exerciseSessionSchema } = require('./server/models/session.model')
+const User = require('./server/models/user.model')
+
+//routes
+const userRoutes = require('./server/routes/user.routes')
+
 
 mongoose.connect(process.env.PW, { useNewUrlParser: true }, { useUnifiedTopology: true });
 
@@ -15,35 +22,36 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/client/views/index.html')
 });
 
-let exerciseSessionSchema = mongoose.Schema({
-  description: { type: String, required: true },
-  duration: { type: Number, required: true },
-  date: String
-})
+// let exerciseSessionSchema = mongoose.Schema({
+//   description: { type: String, required: true },
+//   duration: { type: Number, required: true },
+//   date: String
+// })
 
-let userSchema = mongoose.Schema({
-  username: { type: String, required: true },
-  log: [exerciseSessionSchema]
-})
+// let userSchema = mongoose.Schema({
+//   username: { type: String, required: true },
+//   log: [exerciseSessionSchema]
+// })
 
-let Session = mongoose.model('Session', exerciseSessionSchema);
-let User = mongoose.model('User', userSchema);
+// let Session = mongoose.model('Session', exerciseSessionSchema);
+// let User = mongoose.model('User', userSchema);
 
-
-app.post('/api/users', (req, res) => {
-  //console.log(req.body)
-  let { username } = req.body;
-  let newUser = new User({ username: username })
-  newUser.save((error, savedUser) => {
-    if (!error) {
-      let responseObject = {}
-      responseObject['username'] = savedUser.username;
-      responseObject['_id'] = savedUser.id
-      res.json(responseObject)
-    }
-  })
+// mount routes
+app.use('/', userRoutes)
+// app.post('/api/users', (req, res) => {
+//   // //console.log(req.body)
+//   let { username } = req.body;
+//   let newUser = new User({ username: username })
+//   newUser.save((error, savedUser) => {
+//     if (!error) {
+//       let responseObject = {}
+//       responseObject['username'] = savedUser.username;
+//       responseObject['_id'] = savedUser.id
+//       res.json(responseObject)
+//     }
+//   })
   
-})
+// })
 app.get('/api/users', (req, res) => {
   User.find({}, (error, arrayOfUsers) => {
     res.json(arrayOfUsers);
