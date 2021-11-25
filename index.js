@@ -9,10 +9,10 @@ mongoose.connect(process.env.PW, { useNewUrlParser: true }, { useUnifiedTopology
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/client/public'))
 //no puede ser
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html')
+  res.sendFile(__dirname + '/client/views/index.html')
 });
 
 let exerciseSessionSchema = mongoose.Schema({
