@@ -4,11 +4,11 @@ const User = require("../models/user.model");
 const { Session } = require("../models/session.model");
 const router = express.Router();
 //controllers
-const { create, getAllUsers } = require("../controllers/user.controller.ts");
+const { create, getAllUsers } = require("../controllers/user.controller.js");
 const {
   addExercise,
   showExercises,
-} = require("../controllers/session.controllers.ts");
+} = require("../controllers/session.controllers.js");
 
 router.route("/api/users").post(create).get(getAllUsers);
 
