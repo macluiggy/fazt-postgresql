@@ -15,7 +15,10 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/client/public'))
 //no puede ser
-app.get('/', (req, res) => {
+interface ApiResponse {
+  sendFile(string: string): void
+}
+app.get('/', (_: any, res: ApiResponse) => {
   res.sendFile(__dirname + '/client/views/index.html')
 });
 
