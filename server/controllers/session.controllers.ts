@@ -40,19 +40,38 @@ const addExercise = (req, res) => {
   //console.log(_id)
   //res.json({ hola: newSession.description })
 };
-
+type ApiShowExerciseRequest {
+  
+}
 const showExercises = (req, res) => {
   let { _id: id } = req.params;
   //console.log(id)
   User.findById(id, (error, user) => {
     if (!error && user) {
-      let responseObject = {};
+      interface Logs {
+        description: string;
+        duration: number;
+        date: string;
+        _id: string;
+      }
+      interface ResponseObject {
+        _id: string;
+        username: string;
+        count: number | undefined;
+        log: Array<Logs>;
+      }
+      let responseObject: ResponseObject = {
+        _id: "",
+        username: "",
+        count: undefined,
+        log: [],
+      };
       let count = user.log.length;
       let { username, _id, log } = user;
       responseObject["_id"] = _id;
       responseObject["username"] = username;
       responseObject["count"] = count;
-      responseObject["log"] = log.map((item) => {
+      responseObject["log"] = log.map((item: Logs) => {
         let date = new Date(item.date).toDateString();
         if (date == "Invalid Date") {
           date = new Date().toDateString();
