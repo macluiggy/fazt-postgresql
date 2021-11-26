@@ -4,7 +4,7 @@
 	"description": "A REST API project, part of Free Code Camp's curriculum",
 	"main": "index.js",
 	"scripts": {
-		"start": "ts-node index.ts"
+		"start": "node index.js"
 	},
 	"dependencies": {
 		"@types/node": "^16.11.10",
