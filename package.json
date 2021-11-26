@@ -4,7 +4,7 @@
   "description": "A REST API project, part of Free Code Camp's curriculum",
   "main": "index.js",
   "scripts": {
-    "start": "npm install && npm install @types/node mongodb mongoose ts-node typescript && ts-node index.ts"
+    "start": ""
   },
   "dependencies": {
     "@types/node": "^16.11.10",
