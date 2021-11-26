@@ -1,7 +1,33 @@
 const { Session } = require("../models/session.model");
 var { User } = require("../models/user.model");
+interface Logs {
+  description: string;
+  duration: number;
+  date: string;
+  _id: string;
+}
+interface ResponseObject {
+  _id: string;
+  username: string;
+  count: number | undefined;
+  log: Array<Logs>;
+}
+interface ResponseObjectKeys {
+  [key: string]: string | number | Logs[] | undefined;
+}
+interface User extends ResponseObject {}
 
-const addExercise = (req, res) => {
+type ApiAddExerciseRequest = {
+  body: { description: string; duration: string; date: string };
+  params: { _id: string };
+};
+type ApiAddExerciseResponse = {
+  json(jsonObject: ResponseObjectKeys): void;
+};
+const addExercise = (
+  req: ApiAddExerciseRequest,
+  res: ApiAddExerciseResponse
+) => {
   let { description, duration, date } = req.body;
   let { _id } = req.params;
   console.log(description, duration, date, _id);
@@ -18,9 +44,14 @@ const addExercise = (req, res) => {
     _id,
     { $push: { log: newSession } },
     { new: true },
-    (error, updatedUser) => {
+    (error: any, updatedUser: User) => {
       if (!error && updatedUser) {
-        let responseObject = {};
+        let responseObject: ResponseObjectKeys = {
+          _id: "",
+          username: "",
+          count: undefined,
+          log: [],
+        };
         let { username, _id } = updatedUser;
         let { description, duration, date } = newSession;
 
@@ -40,26 +71,21 @@ const addExercise = (req, res) => {
   //console.log(_id)
   //res.json({ hola: newSession.description })
 };
-type ApiShowExerciseRequest {
-  
-}
-const showExercises = (req, res) => {
+type ApiShowExerciseRequest = {
+  params: { _id: string };
+  query: { from: Date; to: Date; limit: number };
+};
+type ApiShowExerciseResponse = {
+  json(json: ResponseObject): void;
+};
+const showExercises = (
+  req: ApiShowExerciseRequest,
+  res: ApiShowExerciseResponse
+) => {
   let { _id: id } = req.params;
   //console.log(id)
-  User.findById(id, (error, user) => {
+  User.findById(id, (error: any, user: User) => {
     if (!error && user) {
-      interface Logs {
-        description: string;
-        duration: number;
-        date: string;
-        _id: string;
-      }
-      interface ResponseObject {
-        _id: string;
-        username: string;
-        count: number | undefined;
-        log: Array<Logs>;
-      }
       let responseObject: ResponseObject = {
         _id: "",
         username: "",

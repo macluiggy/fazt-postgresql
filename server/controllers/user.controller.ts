@@ -36,7 +36,7 @@ const create = async (
       }
     });
   } catch (err) {
-    const u = err  as { message: string }
+    const u = err as { message: string };
     return res.status(400).json({
       error: u.message,
     });
