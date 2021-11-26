@@ -4,7 +4,7 @@ const User = require("../models/user.model");
 const { Session } = require("../models/session.model");
 const router = express.Router();
 //controllers
-const { create, getAllUsers } = require("../controllers/user.controller.js");
+const { create, getAllUsers } = require("../controllers/user.controller.ts");
 const {
   addExercise,
   showExercises,
