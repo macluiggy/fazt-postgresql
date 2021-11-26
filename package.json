@@ -7,7 +7,6 @@
     "start": "ts-node index.ts"
   },
   "dependencies": {
-    "@types/node": "^16.11.10",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
@@ -28,5 +27,8 @@
   "keywords": [
     "node",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^16.11.10"
+  }
 }
