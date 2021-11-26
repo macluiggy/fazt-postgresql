@@ -1,5 +1,6 @@
 const { Session } = require("../models/session.model");
-var {User} = require("../models/user.model");
+var { User } = require("../models/user.model");
+
 const addExercise = (req, res) => {
   let { description, duration, date } = req.body;
   let { _id } = req.params;
@@ -61,8 +62,8 @@ const showExercises = (req, res) => {
       });
 
       if (req.query.from || req.query.to) {
-        let fromDate = new Date(0);
-        let toDate = new Date();
+        let fromDate: Date | number = new Date(0);
+        let toDate: Date | number = new Date();
 
         if (req.query.from) {
           fromDate = new Date(req.query.from);
