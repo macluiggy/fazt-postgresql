@@ -1,12 +1,12 @@
 var express = require('express')
-const app = express()
-const cors = require('cors')
+var app = express()
+var cors = require('cors')
 require('dotenv').config()
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 //routes
-const userRoutes = require('./server/routes/user.routes')
+var userRoutes = require('./server/routes/user.routes')
 
 
 mongoose.connect(process.env.PW, { useNewUrlParser: true }, { useUnifiedTopology: true });

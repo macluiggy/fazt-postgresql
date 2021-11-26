@@ -8,7 +8,7 @@ interface ApiCreateUserResponse {
     json: (jsonObject: { message: string } | {} | { error: string }) => void;
   };
 }
-const create = async (
+var create = async (
   req: ApiCreateUserRequest,
   res: ApiCreateUserResponse
 ) => {
@@ -55,7 +55,7 @@ type ArrayOfUsersElements = {
 type ApiGetAllUsersResponse = {
   json(array: Array<ArrayOfUsersElements>): void;
 };
-const getAllUsers = (_: any, res: ApiGetAllUsersResponse) => {
+var getAllUsers = (_: any, res: ApiGetAllUsersResponse) => {
   User.find({}, (error: any, arrayOfUsers: ArrayOfUsersElements[]) => {
     if (!error) {
       res.json(arrayOfUsers);

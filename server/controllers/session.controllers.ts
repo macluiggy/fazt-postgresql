@@ -1,4 +1,4 @@
-const { Session } = require("../models/session.model");
+var { Session } = require("../models/session.model");
 var { User } = require("../models/user.model");
 interface Logs {
   description: string;
@@ -24,7 +24,7 @@ type ApiAddExerciseRequest = {
 type ApiAddExerciseResponse = {
   json(jsonObject: ResponseObjectKeys): void;
 };
-const addExercise = (
+var addExercise = (
   req: ApiAddExerciseRequest,
   res: ApiAddExerciseResponse
 ) => {
@@ -78,7 +78,7 @@ type ApiShowExerciseRequest = {
 type ApiShowExerciseResponse = {
   json(json: ResponseObject): void;
 };
-const showExercises = (
+var showExercises = (
   req: ApiShowExerciseRequest,
   res: ApiShowExerciseResponse
 ) => {

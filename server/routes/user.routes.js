@@ -1,11 +1,12 @@
 var express = require("express");
 //model
-const User = require("../models/user.model");
-const { Session } = require("../models/session.model");
-const router = express.Router();
+var User = require("../models/user.model");
+var { Session } = require("../models/session.model");
+var router = express.Router();
 //controllers
-const { create, getAllUsers } = require("../controllers/user.controller");
-const {
+
+var { create, getAllUsers } = require("../controllers/user.controller");
+var {
   addExercise,
   showExercises,
 } = require("../controllers/session.controllers");
