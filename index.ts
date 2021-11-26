@@ -15,16 +15,15 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/client/public'))
 //no puede ser
-interface ApiResponse {
-  sendFile(string: string): void
-}
-app.get('/', (_: any, res: ApiResponse) => {
+
+app.get('/', (_:any, res:any) => {
   res.sendFile(__dirname + '/client/views/index.html')
 });
 
 // mount routes
 app.use('/', userRoutes)
 
-const listener = app.listen(process.env.PORT || 3000, () => {
+let port = process.env.PORT || 3000
+const listener = app.listen(port, () => {
   console.log('Your app is listening on port ' + listener.address().port)
 })
