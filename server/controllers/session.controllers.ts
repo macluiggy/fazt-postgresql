@@ -24,10 +24,11 @@ type ApiAddExerciseRequest = {
 type ApiAddExerciseResponse = {
   json(jsonObject: ResponseObjectKeys): void;
 };
-var addExercise = (
-  req: ApiAddExerciseRequest,
-  res: ApiAddExerciseResponse
-) => {
+type ApiAddExercise = {
+  (request: ApiAddExerciseRequest, response: ApiAddExerciseResponse): void;
+  //tambien se podia sin anidarlo en llaves: (request: ApiAddExerciseRequest, response: ApiAddExerciseResponse) => void;
+};
+var addExercise: ApiAddExercise = (req, res) => {
   let { description, duration, date } = req.body;
   let { _id } = req.params;
   console.log(description, duration, date, _id);
@@ -78,10 +79,11 @@ type ApiShowExerciseRequest = {
 type ApiShowExerciseResponse = {
   json(json: ResponseObject): void;
 };
-var showExercises = (
-  req: ApiShowExerciseRequest,
-  res: ApiShowExerciseResponse
-) => {
+type ApiShowExercise = (
+  request: ApiShowExerciseRequest,
+  response: ApiShowExerciseResponse
+) => void;
+var showExercises: ApiShowExercise = (req, res) => {
   let { _id: id } = req.params;
   //console.log(id)
   User.findById(id, (error: any, user: User) => {
