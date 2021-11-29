@@ -1,17 +1,20 @@
 * {
   box-sizing: border-box;
 }
-
+:root {
+  --red: #db2222;
+  --gray: #666666;
+}
 body {
-  font-family:sans-serif;
+  font-family: sans-serif;
   margin: 25px;
-  color: #222;
-  background-color: #f5f5f5;
+  color: #f5f5f5;
+  background-color: #222;
+  min-width: 250px;
 }
 
 h1 {
   font-weight: bold;
-  
 }
 
 p {
@@ -21,11 +24,13 @@ p {
 form {
   margin-bottom: 25px;
   padding: 15px;
-  background-color: #87D37C;
   display: inline-block;
   width: 100%;
   max-width: 340px;
   border-radius: 5px;
+  border: solid var(--red);
+  height: 1234567890%;
+  margin: 0.78em;
 }
 
 input {
@@ -33,27 +38,75 @@ input {
   margin-bottom: 10px;
   padding: 5px;
   width: 100%;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--red);
   border-radius: 3px;
   font-size: 16px;
+  background-color: var(--gray);
+  color: white;
 }
 
-input[type=submit] {
+input[type="submit"] {
   font-size: 16px;
   border-radius: 3px;
-  background-color: #E4F1FE;
-  border: 1px solid grey;
-  box-shadow: 2px 2px #999;
+  background-color: var(--red);
+  border: 1px solid var(--red);
+  box-shadow: 2px 2px #a80000aa;
   cursor: pointer;
 }
 
-input[type=submit]:hover {
-  background-color: #FFFEC4;
+input[type="submit"]:hover {
+  background-color: var(--gray);
 }
 
 code {
   font-family: monospace;
   font-size: 1.2em;
-  background-color: #FFFEC4;
-  padding: 2px;
+  background-color: var(--gray);
+  padding: 5px;
+  border-radius: 0.5em;
+}
+
+.container {
+  margin: auto;
+  padding: 0;
+  text-align: center;
+}
+
+#footer {
+  border: solid var(--red);
+  border-radius: 0.5em;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 50em;
+  padding: 1.5em;
+  text-align: left;
+}
+.highlight {
+  color: var(--red);
+}
+.forms {
+  /* border: solid; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 1em;
+}
+.p_footer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  /* border: solid; */
+  justify-content: space-between;
+  height: 140px;
+}
+.p_footer .try_it {
+  background-color: var(--red);
+  width: 5em;
+  padding: 0.587em;
+  border-radius: 0.4em;
+  text-align: center;
+  text-decoration: none;
+  color: white;
 }

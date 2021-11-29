@@ -2,35 +2,93 @@
 <html>
   <head>
     <title>Exercise Tracker | freeCodeCamp</title>
-    <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico"  type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="shortcut icon"
+      href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
     <div class="container">
-      <h1>Exercise trackereeee hola mi llaveeee</h1>
-      <form action="/api/users" method="post">
-        <h3>Create a New User</h3>
-        <p><code>POST /api/users</code></p>
-        <input id="uname" type="text" name="username" placeholder="username" />
-        <input type="submit" value="Submit" />
-      </form>
-      <form id="exercise-form" method="post">
-        <h3>Add exercises</h3>
-        <p><code>POST /api/users/:_id/exercises</code></p>
-        <input id="uid" type="text" name=":_id" placeholder=":_id" />
-        <input id="desc" type="text" name="description" placeholder="description*" />
-        <input id="dur" type="text" name="duration" placeholder="duration* (mins.)" />
-        <input id="date" type="text" name="date" placeholder="date (yyyy-mm-dd)" />
-        <input type="submit" value="Submit" />
-      </form>
-      <p>
-        <strong>GET user's exercise log: </strong>
-        <code>GET /api/users/:_id/logs?[from][&amp;to][&amp;limit]</code>
-      </p>
-      <p><strong>[ ]</strong> = optional</p>
-      <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+      <h1>Exercise<span class="highlight">Tracker</span></h1>
+      <div class="forms">
+        <form action="/api/users" method="post">
+          <h3>Create a New User</h3>
+          <p>
+            <code><span class="highlight">POST</span> /api/users</code>
+          </p>
+          <input
+            id="uname"
+            type="text"
+            name="username"
+            placeholder="username"
+          />
+          <input type="submit" value="Submit" />
+        </form>
+        <form id="exercise-form" method="post">
+          <h3>Add exercises</h3>
+          <p>
+            <code
+              ><span class="highlight">POST</span>
+              /api/users/:_id/exercises</code
+            >
+          </p>
+          <input id="uid" type="text" name=":_id" placeholder=":_id" />
+          <input
+            id="desc"
+            type="text"
+            name="description"
+            placeholder="description*"
+          />
+          <input
+            id="dur"
+            type="text"
+            name="duration"
+            placeholder="duration* (mins.)"
+          />
+          <input
+            id="date"
+            type="text"
+            name="date"
+            placeholder="date (yyyy-mm-dd)"
+          />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+      <div id="footer">
+        <p class="p_footer">
+          <strong>GET all users: </strong>
+          <code><span class="highlight">GET</span> /api/users</code>
+          <a href="/api/users" class="try_it">Try it</a>
+        </p>
+        <p class="p_footer">
+          <strong>GET user's exercises logs: </strong>
+          <code><span class="highlight">GET</span> /api/users/:_id/logs</code>
+          <a href="/api/users/615f1d4162e0ecfb99cd98fa/logs" class="try_it"
+            >Try it</a
+          >
+        </p>
+        <p class="p_footer">
+          <strong>GET filtered user's exercise log: </strong>
+          <code
+            ><span class="highlight">GET</span>
+            /api/users/:_id/logs?from=yyyy-mm-dd&amp;to=yyyy-mm-dd&amp;limit=number</code
+          >
+          <a
+            href="/api/users/615f1d4162e0ecfb99cd98fa/logs?from=2000-01-01&to=2021-12-12&limit=5"
+            class="try_it"
+            >Try it</a
+          >
+        </p>
+      </div>
     </div>
     <script>
       const exerciseForm = document.getElementById("exercise-form");
