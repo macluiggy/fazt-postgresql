@@ -49,9 +49,8 @@ Once you have connected to your cluster, use `.sample.env` to create your `.env`
 file.
 
 ```env
-MONGO_URI_PROD=mongodb+srv://<user>:<password>@<cluster#-dbname>.mongodb.net/test
+PW=mongodb+srv://<user>:<password>@<cluster#-dbname>.mongodb.net/<databaseName>?retryWrites=true&w=majority
 
-MONGO_URI_DEV=mongodb://localhost:27017/<db_name>
 ```
 
 ```bash
