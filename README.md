@@ -13,7 +13,7 @@ Tracker](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-e
 
 :heavy_check_mark: You can make a GET request to /api/users to get a list of all users.
 
-:fa-check:The GET request to /api/users returns an array.
+:heavy_check_mark: The GET request to /api/users returns an array.
 
 :heavy_check_mark: Each element in the array returned from GET /api/users is an object literal containing a user's username and _id.
 
