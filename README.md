@@ -1,7 +1,7 @@
 # Exercise Tracker
 
-This project is my solution for [Back End Development and APIs - Exercise
-Tracker](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/exercise-tracker) and it's a part of APIs and Microservices Certification by
+This project is my solution for [Exercise
+Tracker](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/exercise-tracker) and it's a part of Back End Development and APIs Certification by
 [freeCodeCamp]( https://www.freecodecamp.org/).
 
 ## freeCodeCamp tests Requirements
