@@ -19,7 +19,7 @@
   <body>
     <div class="container">
       <h1>Exercise<span class="highlight">Tracker</span></h1>
-      <div class='forms'>
+      <div class="forms">
         <form action="/api/users" method="post">
           <h3>Create a New User</h3>
           <p>
@@ -64,17 +64,29 @@
         </form>
       </div>
       <div id="footer">
-        <p>
-          <strong
-            ><span class="highlight">GET</span> user's exercise log:
-          </strong>
-          <code>GET /api/users/:_id/logs?from=yyyy-mm-dd&amp;to=yyyy-mm-dd&amp;limit=number</code>
-          <a href="/api/users/615f1d4162e0ecfb99cd98fa/logs?from=2000-01-01&to=2021-12-12&limit=5">Try it</a>
+        <p class="p_footer">
+          <strong>GET all users: </strong>
+          <code><span class="highlight">GET</span> /api/users</code>
+          <a href="/api/users" class="try_it">Try it</a>
         </p>
-        <p><strong>[ ]</strong> = optional</p>
-        <p>
-          <strong>from, to</strong> = dates (yyyy-mm-dd);
-          <strong>limit</strong> = number
+        <p class="p_footer">
+          <strong>GET user's exercises logs: </strong>
+          <code><span class="highlight">GET</span> /api/users/:_id/logs</code>
+          <a href="/api/users/615f1d4162e0ecfb99cd98fa/logs" class="try_it"
+            >Try it</a
+          >
+        </p>
+        <p class="p_footer">
+          <strong>GET filtered user's exercise log: </strong>
+          <code
+            ><span class="highlight">GET</span>
+            /api/users/:_id/logs?from=yyyy-mm-dd&amp;to=yyyy-mm-dd&amp;limit=number</code
+          >
+          <a
+            href="/api/users/615f1d4162e0ecfb99cd98fa/logs?from=2000-01-01&to=2021-12-12&limit=5"
+            class="try_it"
+            >Try it</a
+          >
         </p>
       </div>
     </div>
