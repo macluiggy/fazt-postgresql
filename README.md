@@ -1,7 +1,7 @@
 # Exercise Tracker
 
 This project is my solution for [Exercise
-Tracker](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/exercise-tracker) and it's a part of Back End Development and APIs Certification by
+Tracker](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/exercise-tracker) and it's a part of [Back End Development and APIs Certification](url) by
 [freeCodeCamp]( https://www.freecodecamp.org/).
 
 ## freeCodeCamp tests Requirements
