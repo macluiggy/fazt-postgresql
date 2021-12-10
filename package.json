@@ -1,0 +1,25 @@
+{
+  "name": "postgresql-fazt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macluiggy/fazt-postgresql.git"
+  },
+  "keywords": [],
+  "author": "LUiggy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macluiggy/fazt-postgresql/issues"
+  },
+  "homepage": "https://github.com/macluiggy/fazt-postgresql#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  }
+}
