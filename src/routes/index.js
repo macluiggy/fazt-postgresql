@@ -4,6 +4,7 @@ var {
   getUsers,
   createUser,
   getUserById,
+  
 } = require("../controllers/index.controller");
 
 router.route("/users").get(getUsers).post(createUser);
