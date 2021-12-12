@@ -11,4 +11,4 @@ INSERT INTO users (name, email) VALUES
     ('joe', 'joe@iom.com'),
     ('ryan', 'ryan@faztweb.com');
 
--- para ver los datos ingresados teclea: select * from users;
+-- para ver los datos ingresados teclea: select * from users;d
