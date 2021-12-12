@@ -73,6 +73,22 @@ class IndexController {
         res.send(message);
       }
     },
+
+    updateUser: async (req, res, next) => {
+      const { name, email } = req.body;
+      const { id } = req.params;
+      // res.send(`user updated with id: ${req.params.id}`);
+      try {
+        const response = await pool.query(
+          "UPDATE users SET name = $1, email = $2 WHERE id = $3",
+          [name, email, id]
+        );
+
+        res.send(response)
+      } catch (error) {
+        console.log(error);
+      }
+    },
   };
 }
 
