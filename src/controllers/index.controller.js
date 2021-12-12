@@ -16,6 +16,16 @@ class IndexController {
     // res.send('users')
     res.status(200).json(rows);
   };
+
+  static getUserById = async (req, res) => {
+    const { id } = req.params
+    // res.send("user by id: " + id);
+    // selecciona todos lo valores de la base de datos desde la table users donde el id sea igual a $1
+    const {rows} = await pool.query('SELECT * FROM users WHERE id = $1', [id])
+    console.log(rows);
+    res.json(rows)
+  };
+
   static createUser = async (req, res) => {
     // res.send('users')
     // console.log(req.body);
@@ -28,13 +38,12 @@ class IndexController {
     );
     console.log(response);
     return res.json({
-      message: 'User Added Successfully',
+      message: "User Added Successfully",
       body: {
-        user: {name, email}
-      }
-    })
+        user: { name, email },
+      },
+    });
     res.send("user created");
-
   };
 }
 
