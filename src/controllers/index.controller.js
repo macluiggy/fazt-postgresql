@@ -11,22 +11,34 @@ const pool = new Pool({
 class IndexController {
   static fn = {
     getUsers: async (req, res) => {
-      // se recibe la respuesta, esto se realiza desde la conecion que se hizo en pool, lo que hace es que pool tiene un metodo query donde pondes el comando que se quiere realizar en la base de datos, esta quiere decir que desde la base de datos 'users' seleccione todos los items y los guarde un una variable, esta variable sera un array conteninedo cada dato guardado
-      const { rows } = await pool.query("SELECT * FROM users"); //tanto SELECT como FROM se pueden usar con mayusculas o minusculas
-      console.log(rows);
-      // res.send('users')
-      res.status(200).json(rows);
+      try {
+        // se recibe la respuesta, esto se realiza desde la conecion que se hizo en pool, lo que hace es que pool tiene un metodo query donde pondes el comando que se quiere realizar en la base de datos, esta quiere decir que desde la base de datos 'users' seleccione todos los items y los guarde un una variable, esta variable sera un array conteninedo cada dato guardado
+        const { rows } = await pool.query("SELECT * FROM users"); //tanto SELECT como FROM se pueden usar con mayusculas o minusculas
+        console.log(rows);
+        // res.send('users')
+        res.status(200).json(rows);
+      } catch (error) {
+        console.log(error);
+      }
     },
+
     getUserById: async (req, res) => {
       const { id } = req.params;
       // res.send("user by id: " + id);
-      // selecciona todos lo valores de la base de datos desde la table users donde el id sea igual a $1
-      const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
-        id,
-      ]);
-      console.log(rows);
-      res.json(rows);
+      try {
+        // selecciona todos lo valores de la base de datos desde la table users donde el id sea igual a $1
+        const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
+          id,
+        ]);
+        const { length } = rows;
+        if (!length) return res.send("user not found");
+        console.log(rows);
+        res.json(rows);
+      } catch (error) {
+        console.log(error);
+      }
     },
+
     createUser: async (req, res) => {
       // res.send('users')
       // console.log(req.body);
@@ -45,6 +57,21 @@ class IndexController {
         },
       });
       res.send("user created");
+    },
+
+    deleteUser: async (req, res) => {
+      const { id } = req.params;
+      try {
+        const { rows } = await pool.query("DELETE FROM users WHERE id = $1", [
+          id,
+        ]);
+        console.log(rows);
+        res.send(`user deleted with id: ${id}`);
+      } catch (error) {
+        const { message } = error;
+        console.log(error);
+        res.send(message);
+      }
     },
   };
 }
